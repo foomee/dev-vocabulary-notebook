@@ -207,7 +207,8 @@ button {
   color: var(--paper);
 }
 
-.add-button:hover {
+.add-button:hover, 
+.add-btn:hover {
   background: #294d68;
   color: #fff;
 }
@@ -282,10 +283,32 @@ button {
     font: inherit;
 }
 
+.tag-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: var(--blue);
+    color: #fff;
+}
+
+.tag-item button {
+    border: none;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
 .add-btn {
   padding: 0 100px;
   margin: 20px auto 0;
+  background-color: #fff;
+  color: var(--paper);
 }
+
+
 
 
 @media (max-width: 600px) {
