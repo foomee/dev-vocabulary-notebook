@@ -20,28 +20,36 @@
         <div class="table-wrap">
           <table>
             <colgroup>
-              <col style="width: 80%;">
-              <col style="width: 20%;">
+              <col style="width: 50%;">
+              <col style="width: 30%;">
+              <col style="width: 5%;">
+              <col style="width: 5%;">
+              <col style="width: 5%;">
+              <col style="width: 5%;">
             </colgroup>
 
             <thead>
               <tr>
                 <th class="tag-heading">単語</th>
-                <td>タグ</td>
+                <th>タグ</th>
+                <th scope="col"><span class="status-label star">★</span></th>
+                <th scope="col"><span class="status-label blue">●</span></th>
+                <th scope="col"><span class="status-label yellow">●</span></th>
+                <th scope="col"><span class="status-label red">●</span></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="word-list">
               <tr>
                 <th scope="row">element</th>
-                <td>HTML</td></td>
+                <td>HTML</td><td>4</td><td>3</td><td>2</td><td>1</td>
               </tr>
               <tr>
                 <th scope="row">attribute</th>
-                <td>HTML</td>
+                <td>HTML</td><td>4</td><td>3</td><td>2</td><td>1</td>
               </tr>
               <tr>
                 <th scope="row">paragraph</th>
-                <td>HTML</td>
+                <td>HTML</td><td>4</td><td>3</td><td>2</td><td>1</td>
               </tr>
             </tbody>
 
@@ -53,5 +61,7 @@
     </main>
 
   </div>
+  <script src="js/words-data.js" defer></script>
+  <script src="js/words.js" defer></script>
 </body>
 </html>
