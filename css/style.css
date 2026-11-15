@@ -186,6 +186,7 @@ tbody tr:hover {
   grid-template-columns: 1fr 1fr;
   gap: 13px;
   margin-top: 28px;
+  margin-bottom: 20px;
 }
 
 button {
@@ -229,6 +230,63 @@ button {
 .list-icon {
   font-size: 23px;
 }
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.form-row label {
+    width: 80px;
+    flex-shrink: 0;
+}
+
+.form-row > input,
+.form-row > textarea,
+.tag-input-container {
+    flex: 1;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--canvas);
+    color: var(--ink);
+    font: inherit;
+}
+
+.form-row > textarea {
+    resize: vertical;
+}
+
+.tag-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-input-container input {
+    flex: 1;
+    min-width: 120px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+}
+
+.add-btn {
+  padding: 0 100px;
+  margin: 20px auto 0;
+}
+
 
 @media (max-width: 600px) {
   .app-shell {

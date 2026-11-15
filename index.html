@@ -63,7 +63,7 @@
       </section>
 
       <nav class="actions">
-        <button class="add-button" type="button">
+        <button class="add-button" id="toggle-form" type="button">
           <span class="button-icon">＋</span>
           <span>カードを追加</span>
         </button>
@@ -72,8 +72,33 @@
           <span><a href="words.html">一覧を見る</a></span>
         </button>
       </nav>
-    </main>
 
+
+      <form class="add-card" id="add-card-form" hidden>
+        <div class="form-row">
+          <label for="word">単語</label>
+          <input id="word" name="word" type="text" placeholder="単語を入力">
+        </div>
+
+        <div class="form-row">
+          <label for="description">説明</label>
+          <textarea id="description" name="description" rows="3" placeholder="単語の意味や説明を入力"></textarea>
+        </div>
+
+        <div class="form-row">
+          <label for="tag">タグ</label>
+          <div class="tag-input-container" id="tag-container">
+            <div class="tag-list" id="tag-list"></div>
+            <input id="tag-input" name="tag" type="text" placeholder="タグを入力してEnter">
+          </div>
+        </div>
+        
+        <button class="add-btn" type="submit">追加</button>
+      </form>
+
+    </main>
   </div>
+
+  <script src="js/main.js"></script>  
 </body>
 </html>
