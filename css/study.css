@@ -106,22 +106,22 @@ h1 {
   line-height: 1.8;
 }
 
-.study-buttons {
+.study-status {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  margin-top: 20px;
 }
 
-.study-buttons button {
-  padding: 12px 24px;
+#favorite-button {
+  padding: 10px 24px;
   color: var(--ink);
-  background: var(--canvas);
-  border: 1px solid var(--line);
+  background: var(--paper);
+  border: 1px solid var(--yellow);
   border-radius: 8px;
   cursor: pointer;
 }
 
-.study-buttons button:hover {
+#favorite-button:hover {
   background: #294d68;
 }
 

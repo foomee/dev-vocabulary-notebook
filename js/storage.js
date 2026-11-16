@@ -1,19 +1,33 @@
-const wordStatuses = {
+// 保存データの読み込み
+function loadWordStatuses() {
+    const savedData = localStorage.getItem("wordStatuses");
 
-    1: {
-        favorite: false,
-        mark1: false,
-        mark2: false,
-        mark3: false,
-        learned: false,
-        correct: false
-    },
-    2: {
-        favorite: false,
-        mark1: false,
-        mark2: false,
-        mark3: false,
-        learned: false,
-        correct: false
+    if (savedData === null) {
+        return createInitialStatuses();
     }
-};
+
+    return JSON.parse(savedData);
+}
+
+// 保存データの書き込み
+function saveWordStatuses(statuses) {
+    localStorage.setItem("wordStatuses", JSON.stringify(statuses));
+}
+
+// 初期データを定義する関数
+function createInitialStatuses() {
+    const statuses = {};
+
+    words.forEach(function(item) {
+        statuses[item.id] = {
+            favorite: false,
+            mark1: false,
+            mark2: false,
+            mark3: false,
+            learned: false,
+            correct: null
+        };
+    });
+
+    return statuses;
+}
