@@ -214,6 +214,15 @@ button {
 }
 
 .list-button {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;  
+
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+
   background: var(--paper);
   color: #ffffff;
 }
