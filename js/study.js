@@ -18,6 +18,9 @@ let currentIndex = 0;
 // 説明を表示しているかどうか
 let isDescriptionVisible = false;
 
+// 学習完了状態を管理する変数
+let isStudyComplete = false;
+
 // 最初の単語を表示
 function showWord() {
     const currentWord = studyWords[currentIndex];
@@ -39,6 +42,11 @@ function showWord() {
 
 // カードをクリックしたときの処理
 wordCard.addEventListener("click", function() {
+    // 学習完了後ならトップページへ戻る
+    if (isStudyComplete) {
+        window.location.href = "index.html";
+        return;
+    }    
 
     // 説明が表示されていない場合
     if (!isDescriptionVisible) {
@@ -65,6 +73,8 @@ showWord();
 
 // 学習完了時の表示
 function showComplete() {
+    isStudyComplete = true;
+
     studyWord.hidden = true;
     studyDescription.hidden = true;
     cardAction.hidden = true;
