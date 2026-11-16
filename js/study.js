@@ -78,6 +78,13 @@ wordCard.addEventListener("click", function() {
 
     // 説明が表示されている場合
     } else {
+        const currentWord = studyWords[currentIndex];
+
+        // 学習済にする
+        wordStatuses[currentWord.id].learned = true;
+        // 保存
+        saveWordStatuses(wordStatuses);
+
         currentIndex++;
 
         if (currentIndex < studyWords.length) {

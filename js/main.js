@@ -1,3 +1,6 @@
+// 単語のステータスを読み込む
+const wordStatuses = loadWordStatuses();
+
 // タグ一覧を取得
 const tags = [...new Set(words.flatMap(function(item) {
     return item.tags;
@@ -6,9 +9,17 @@ const tags = [...new Set(words.flatMap(function(item) {
 // タグ一覧の要素を取得
 const tagList = document.getElementById("tag-list");
 
+// タグ入力フォーム用
+const selectedTagList = document.getElementById("selected-tag-list");
+
 // タグ一覧を生成
 tags.forEach(function(tag) {
     const row = document.createElement("tr");
+
+    // タグに該当する学習済の単語数を取得
+    const learnedCount = words.filter(function(item) {
+        return item.tags.includes(tag) && wordStatuses[item.id].learned;
+    }).length;
 
     const tagCell = document.createElement("th");
     tagCell.scope = "row";
@@ -20,13 +31,21 @@ tags.forEach(function(tag) {
     tagCell.appendChild(tagLink);
     row.appendChild(tagCell);
 
-    // 仮の統計データ用セル
-    for (let i = 0; i < 5; i++) {
+    // 学習済の数を表示
+    const learnedCell = document.createElement("td");
+    learnedCell.textContent = learnedCount;
+    row.appendChild(learnedCell);
+
+    // 残り4つの統計データ用セル
+    for (let i = 0; i < 4; i++) {
         const cell = document.createElement("td");
         row.appendChild(cell);
     }
 
     tagList.appendChild(row);
+
+    // 確認用
+    console.log(tag, learnedCount);
 });
 
 
@@ -100,7 +119,7 @@ function displayTags() {
         });
 
         tagItem.append(tagName, deleteButton);
-        tagList.appendChild(tagItem);
+        selectedTagList.appendChild(tagItem);
     }
 }
 
