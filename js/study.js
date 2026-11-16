@@ -6,6 +6,10 @@ const cardAction = document.getElementById("card-action");
 const studyProgress = document.getElementById("study-progress");
 // 学習完了！用
 const studyComplete = document.getElementById("study-complete");
+// ★ボタン用
+const favoriteButton = document.getElementById("favorite-button");
+// wordStatusesを読み込んでおく
+const wordStatuses = loadWordStatuses();
 
 // URLパラメータから学習対象のタグを取得
 const params = new URLSearchParams(window.location.search);
@@ -42,6 +46,11 @@ function showWord() {
     studyComplete.hidden = true;
     studyWord.hidden = false;
     cardAction.hidden = false;
+
+    // お気に入り状態を反映
+    const isFavorite = wordStatuses[currentWord.id].favorite;
+
+    favoriteButton.textContent = isFavorite ? "★ お気に入り" : "☆ お気に入り";
 }
 
 // カードをクリックしたときの処理
@@ -71,6 +80,26 @@ wordCard.addEventListener("click", function() {
     }
 });
 
+
+// お気に入りボタンをクリックしたときの処理
+favoriteButton.addEventListener("click", function() {
+
+    // 現在の単語IDを取得
+    const currentWord = studyWords[currentIndex];
+
+    // お気に入り状態を反転
+    wordStatuses[currentWord.id].favorite = !wordStatuses[currentWord.id].favorite;
+
+    // ボタンの表示を更新
+    favoriteButton.textContent = wordStatuses[currentWord.id].favorite
+        ? "★ お気に入り"
+        : "☆ お気に入り";
+
+    // localStorageに保存
+    saveWordStatuses(wordStatuses);
+});
+
+
 // 初期表示
 if (studyWords.length > 0) {
     showWord();
@@ -81,6 +110,7 @@ if (studyWords.length > 0) {
     studyComplete.hidden = true;
     studyProgress.textContent = "";
     wordCard.disabled = true;
+    favoriteButton.hidden = true;
 }
 
 
