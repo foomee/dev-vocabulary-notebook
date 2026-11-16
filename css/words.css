@@ -148,6 +148,11 @@ tbody tr:not(.description-row) {
   font-size: 10px;
 }
 
+.mark-button.active {
+  background: #294d68;
+  border: 2px solid var(--yellow);
+}
+
 @media (max-width: 600px) {
   .app-shell {
     width: 100%;

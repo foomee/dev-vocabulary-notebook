@@ -8,6 +8,10 @@ const studyProgress = document.getElementById("study-progress");
 const studyComplete = document.getElementById("study-complete");
 // ★ボタン用
 const favoriteButton = document.getElementById("favorite-button");
+// マークボタン用
+const mark1Button = document.getElementById("mark1-button");
+const mark2Button = document.getElementById("mark2-button");
+const mark3Button = document.getElementById("mark3-button");
 // wordStatusesを読み込んでおく
 const wordStatuses = loadWordStatuses();
 
@@ -49,6 +53,10 @@ function showWord() {
 
     // お気に入り状態を反映
     const isFavorite = wordStatuses[currentWord.id].favorite;
+    // マーク状態を反映
+    mark1Button.classList.toggle("active", wordStatuses[currentWord.id].mark1);
+    mark2Button.classList.toggle("active", wordStatuses[currentWord.id].mark2);
+    mark3Button.classList.toggle("active", wordStatuses[currentWord.id].mark3);
 
     favoriteButton.textContent = isFavorite ? "★ お気に入り" : "☆ お気に入り";
 }
@@ -98,6 +106,31 @@ favoriteButton.addEventListener("click", function() {
     // localStorageに保存
     saveWordStatuses(wordStatuses);
 });
+
+
+// マークボタンのクリック処理
+function toggleMark(button, mark) {
+
+    button.addEventListener("click", function() {
+
+        // 現在の単語IDを取得
+        const currentWord = studyWords[currentIndex];
+
+        // マーク状態を反転
+        wordStatuses[currentWord.id][mark] = !wordStatuses[currentWord.id][mark];
+
+        // 表示を更新
+        button.classList.toggle("active", wordStatuses[currentWord.id][mark]);
+
+        // localStorageに保存
+        saveWordStatuses(wordStatuses);
+    });
+}
+
+// 各マークのイベントを設定
+toggleMark(mark1Button, "mark1");
+toggleMark(mark2Button, "mark2");
+toggleMark(mark3Button, "mark3");
 
 
 // 初期表示

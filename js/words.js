@@ -37,10 +37,32 @@ for (let i = 0; i < words.length; i++) {
     favoriteCell.appendChild(favoriteButton);
     wordRow.appendChild(favoriteCell);
 
-    // 残り3つのステータス用セルを追加
-    for (let j = 0; j < 3; j++) {
-        const statusCell = document.createElement("td");
-        wordRow.appendChild(statusCell);
+    // マークボタンを3つ作成
+    const marks = ["mark1", "mark2", "mark3"];
+    const markIcons = ["🔵", "🟡", "🔴"];
+
+    for (let j = 0; j < marks.length; j++) {
+
+        const markCell = document.createElement("td");
+        const markButton = document.createElement("button");
+
+        markButton.type = "button";
+        markButton.classList.add("mark-button");
+
+        // 単語IDとマーク名を保存
+        markButton.dataset.wordId = words[i].id;
+        markButton.dataset.mark = marks[j];
+
+        // 登録状態を反映
+        markButton.classList.toggle(
+            "active",
+            wordStatuses[words[i].id][marks[j]]
+        );
+
+        markButton.textContent = markIcons[j];
+
+        markCell.appendChild(markButton);
+        wordRow.appendChild(markCell);
     }
 
     // テーブルに追加
@@ -63,12 +85,34 @@ wordList.addEventListener("click", function(event) {
 
         // ボタンの表示を更新
         favoriteButton.textContent = wordStatuses[wordId].favorite ? "★" : "☆";
-        
+
         // localStorageに保存
         saveWordStatuses(wordStatuses);
 
         return;
     }
+
+    // マークボタンがクリックされた場合
+    const markButton = event.target.closest(".mark-button");
+
+    if (markButton) {
+
+        // 単語IDとマーク名を取得
+        const wordId = markButton.dataset.wordId;
+        const mark = markButton.dataset.mark;
+
+        // マーク状態を反転
+        wordStatuses[wordId][mark] = !wordStatuses[wordId][mark];
+
+        // 表示を更新
+        markButton.classList.toggle("active", wordStatuses[wordId][mark]);
+
+        // localStorageに保存
+        saveWordStatuses(wordStatuses);
+
+        return;
+    }
+    
 
     // クリックされた行を取得
     const clickedRow = event.target.closest("tr");
