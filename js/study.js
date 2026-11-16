@@ -7,9 +7,13 @@ const studyProgress = document.getElementById("study-progress");
 // 学習完了！用
 const studyComplete = document.getElementById("study-complete");
 
+// URLパラメータから学習対象のタグを取得
+const params = new URLSearchParams(window.location.search);
+const selectedTag = params.get("tag");
+
 // 学習する単語を取得
 const studyWords = words.filter(function(item) {
-    return item.tags.includes("HTML");
+    return item.tags.includes(selectedTag);
 });
 
 // 現在の単語の位置
@@ -68,7 +72,16 @@ wordCard.addEventListener("click", function() {
 });
 
 // 初期表示
-showWord();
+if (studyWords.length > 0) {
+    showWord();
+} else {
+    studyWord.textContent = "学習する単語がありません";
+    studyDescription.hidden = true;
+    cardAction.hidden = true;
+    studyComplete.hidden = true;
+    studyProgress.textContent = "";
+    wordCard.disabled = true;
+}
 
 
 // 学習完了時の表示
