@@ -1,3 +1,6 @@
+// 単語のステータスを読み込む
+const wordStatuses = loadWordStatuses();
+
 // 単語一覧の要素を取得
 const wordList = document.getElementById("word-list");
 
