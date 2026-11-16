@@ -23,8 +23,22 @@ for (let i = 0; i < words.length; i++) {
     wordRow.appendChild(wordCell);
     wordRow.appendChild(tagCell);
 
-    // ステータス用のセルを4つ追加
-    for (let j = 0; j < 4; j++) {
+    // お気に入りボタンを作成
+    const favoriteCell = document.createElement("td");
+    const favoriteButton = document.createElement("button");
+
+    favoriteButton.type = "button";
+    favoriteButton.classList.add("favorite-button");
+    favoriteButton.dataset.wordId = words[i].id;
+
+    // お気に入り状態によって表示を変更
+    favoriteButton.textContent = wordStatuses[words[i].id].favorite ? "★" : "☆";
+
+    favoriteCell.appendChild(favoriteButton);
+    wordRow.appendChild(favoriteCell);
+
+    // 残り3つのステータス用セルを追加
+    for (let j = 0; j < 3; j++) {
         const statusCell = document.createElement("td");
         wordRow.appendChild(statusCell);
     }
@@ -36,6 +50,25 @@ for (let i = 0; i < words.length; i++) {
 
 // 単語をクリックしたときの処理
 wordList.addEventListener("click", function(event) {
+
+    // お気に入りボタンがクリックされた場合
+    const favoriteButton = event.target.closest(".favorite-button");
+
+    if (favoriteButton) {
+        // 単語IDを取得
+        const wordId = favoriteButton.dataset.wordId;
+
+        // お気に入り状態を反転
+        wordStatuses[wordId].favorite = !wordStatuses[wordId].favorite;
+
+        // ボタンの表示を更新
+        favoriteButton.textContent = wordStatuses[wordId].favorite ? "★" : "☆";
+        
+        // localStorageに保存
+        saveWordStatuses(wordStatuses);
+
+        return;
+    }
 
     // クリックされた行を取得
     const clickedRow = event.target.closest("tr");
