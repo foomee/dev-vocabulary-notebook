@@ -120,6 +120,15 @@ thead th:first-child {
   padding-left: 17px;
 }
 
+#tag-list tr {
+  cursor: pointer;
+}
+
+#tag-list a {
+  text-decoration: none;
+  color: var(--ink);
+}
+
 tbody {
     background-color: #1e2f40;
 }

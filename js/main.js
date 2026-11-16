@@ -103,3 +103,19 @@ function displayTags() {
         tagList.appendChild(tagItem);
     }
 }
+
+
+// 行をクリックしたときの処理
+tagList.addEventListener("click", function(event) {
+    const clickedRow = event.target.closest("tr");
+
+    if (!clickedRow) {
+        return;
+    }
+
+    const link = clickedRow.querySelector("a");
+
+    if (link) {
+        window.location.href = link.href;
+    }
+});
