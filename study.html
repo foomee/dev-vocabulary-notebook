@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プログラミング頻出英単語・略語・専門用語の単語帳</title>
+    <link rel="stylesheet" href="css/study.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <h1 id="page-title">プログラミング頻出英単語帳</h1>
+        <p class="intro-text">プログラミング学習をよりスムーズに。</p>
+      </section>
+
+        <section class="study-area" aria-label="単語学習">
+            <p class="study-progress" id="study-progress">1 / 5</p>
+
+            <button type="button" class="word-card" id="word-card">
+                <h2 id="study-word">element</h2>
+
+                <p id="study-description" hidden>
+                    HTMLの文書を構成する個々の要素。
+                </p>
+
+                <p id="study-complete" hidden>学習完了！</p>
+
+                <span id="card-action">説明を見る ↓</span>
+            </button>
+        </section>
+
+    </main>
+  </div>
+
+
+    <script src="js/words-data.js" defer></script>
+    <script src="js/study.js" defer></script> 
+</body>
+</html>

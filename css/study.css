@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+:root {
+  color-scheme: dark;
+  --ink: #ffffff;
+  --muted: #71838d;
+  --line: #dce6ea;
+  --paper: #1b1d38;
+  --canvas: #16162c;
+  --blue: #398bd6;
+  --yellow: #e7b638;
+  --red: #df6262;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+
+.app-shell {
+  width: min(100% - 40px, 920px);
+  margin: 36px auto;
+  overflow: hidden;
+  background: var(--paper);
+  border: 1px solid #e1e9ed;
+  border-radius: 14px;
+  box-shadow: 0 12px 36px rgb(23 52 67 / 8%);
+}
+
+main {
+  padding: 42px 48px 38px;
+}
+
+h1 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(22px, 3.3vw, 31px);
+  line-height: 1.45;
+  letter-spacing: .015em;
+}
+
+.intro {
+  margin-bottom: 36px;
+}
+
+.intro-text {
+  color: var(--muted);
+}
+
+.study-area {
+  text-align: center;
+}
+
+.study-progress {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.word-card {
+  width: 100%;
+  max-width: 680px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  margin: 32px auto;
+  padding: 48px;
+  color: var(--ink);
+  background: var(--canvas);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.word-card:hover {
+  background: #20203d;
+}
+
+.word-card:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
+}
+
+#card-action {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.word-card h2 {
+  font-size: clamp(32px, 5vw, 48px);
+}
+
+.word-card p {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.study-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.study-buttons button {
+  padding: 12px 24px;
+  color: var(--ink);
+  background: var(--canvas);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.study-buttons button:hover {
+  background: #294d68;
+}
+
+@media (max-width: 600px) {
+  .app-shell {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  main {
+    padding: 32px 18px 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
