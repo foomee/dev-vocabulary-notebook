@@ -184,12 +184,6 @@ tbody tr:hover {
   font-weight: 400;
 }
 
-.table-note {
-  margin: 9px 2px 0;
-  color: #9aa8ae;
-  font-size: 10px;
-}
-
 .actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
