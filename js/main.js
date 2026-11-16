@@ -21,6 +21,27 @@ tags.forEach(function(tag) {
         return item.tags.includes(tag) && wordStatuses[item.id].learned;
     }).length;
 
+    // タグに該当するお気に入りの単語数を取得
+    const favoriteCount = words.filter(function(item) {
+        return item.tags.includes(tag) && wordStatuses[item.id].favorite;
+    }).length;
+
+    // タグに該当するmark1の単語数を取得
+    const mark1Count = words.filter(function(item) {
+        return item.tags.includes(tag) && wordStatuses[item.id].mark1;
+    }).length;
+
+    // タグに該当するmark2の単語数を取得
+    const mark2Count = words.filter(function(item) {
+        return item.tags.includes(tag) && wordStatuses[item.id].mark2;
+    }).length;
+
+    // タグに該当するmark3の単語数を取得
+    const mark3Count = words.filter(function(item) {
+        return item.tags.includes(tag) && wordStatuses[item.id].mark3;
+    }).length;
+
+
     const tagCell = document.createElement("th");
     tagCell.scope = "row";
 
@@ -36,11 +57,26 @@ tags.forEach(function(tag) {
     learnedCell.textContent = learnedCount;
     row.appendChild(learnedCell);
 
-    // 残り4つの統計データ用セル
-    for (let i = 0; i < 4; i++) {
-        const cell = document.createElement("td");
-        row.appendChild(cell);
-    }
+    // お気に入りの数を表示
+    const favoriteCell = document.createElement("td");
+    favoriteCell.textContent = favoriteCount;
+    row.appendChild(favoriteCell);
+
+    // mark1の数を表示
+    const mark1Cell = document.createElement("td");
+    mark1Cell.textContent = mark1Count;
+    row.appendChild(mark1Cell);
+
+    // mark2の数を表示
+    const mark2Cell = document.createElement("td");
+    mark2Cell.textContent = mark2Count;
+    row.appendChild(mark2Cell);
+
+    // mark3の数を表示
+    const mark3Cell = document.createElement("td");
+    mark3Cell.textContent = mark3Count;
+    row.appendChild(mark3Cell);
+
 
     tagList.appendChild(row);
 
