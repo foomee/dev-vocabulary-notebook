@@ -1,3 +1,35 @@
+// タグ一覧を取得
+const tags = [...new Set(words.flatMap(function(item) {
+    return item.tags;
+}))];
+
+// タグ一覧の要素を取得
+const tagList = document.getElementById("tag-list");
+
+// タグ一覧を生成
+tags.forEach(function(tag) {
+    const row = document.createElement("tr");
+
+    const tagCell = document.createElement("th");
+    tagCell.scope = "row";
+
+    const tagLink = document.createElement("a");
+    tagLink.href = `dashboard.html?tag=${encodeURIComponent(tag)}`;
+    tagLink.textContent = tag;
+
+    tagCell.appendChild(tagLink);
+    row.appendChild(tagCell);
+
+    // 仮の統計データ用セル
+    for (let i = 0; i < 5; i++) {
+        const cell = document.createElement("td");
+        row.appendChild(cell);
+    }
+
+    tagList.appendChild(row);
+});
+
+
 // 「カードを追加」ボタンを押したときの処理
 const toggleForm = document.getElementById("toggle-form");
 const addCardForm = document.getElementById("add-card-form");
@@ -10,7 +42,6 @@ toggleForm.addEventListener("click", function () {
 // タグを保存する処理
 // 指定したIDがある要素を取得して、タグを保存する配列を用意する
 const tagInput = document.getElementById("tag-input");
-const tagList = document.getElementById("tag-list");
 
 let selectedTags = []; // 現在登録されているタグを管理する配列
 
