@@ -85,6 +85,7 @@ wordList.addEventListener("click", function(event) {
 
         // ボタンの表示を更新
         favoriteButton.textContent = wordStatuses[wordId].favorite ? "★" : "☆";
+        favoriteButton.classList.toggle("active", wordStatuses[wordId].favorite);
 
         // localStorageに保存
         saveWordStatuses(wordStatuses);
@@ -112,7 +113,7 @@ wordList.addEventListener("click", function(event) {
 
         return;
     }
-    
+
 
     // クリックされた行を取得
     const clickedRow = event.target.closest("tr");
