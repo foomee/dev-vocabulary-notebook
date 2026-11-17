@@ -6,6 +6,10 @@ const cardAction = document.getElementById("card-action");
 const studyProgress = document.getElementById("study-progress");
 // 学習完了！用
 const studyComplete = document.getElementById("study-complete");
+// 正解・不正解ボタン用
+const answerButtons = document.getElementById("answer-buttons");
+const correctButton = document.getElementById("correct-button");
+const incorrectButton = document.getElementById("incorrect-button");
 // ★ボタン用
 const favoriteButton = document.getElementById("favorite-button");
 // マークボタン用
@@ -50,6 +54,7 @@ function showWord() {
     studyComplete.hidden = true;
     studyWord.hidden = false;
     cardAction.hidden = false;
+    answerButtons.hidden = true;
 
     // お気に入り状態を反映
     const isFavorite = wordStatuses[currentWord.id].favorite;
@@ -59,6 +64,8 @@ function showWord() {
     mark3Button.classList.toggle("active", wordStatuses[currentWord.id].mark3);
 
     favoriteButton.textContent = isFavorite ? "★ お気に入り" : "☆ お気に入り";
+
+    console.log(answerButtons.hidden);
 }
 
 // カードをクリックしたときの処理
@@ -72,27 +79,10 @@ wordCard.addEventListener("click", function() {
     // 説明が表示されていない場合
     if (!isDescriptionVisible) {
         studyDescription.hidden = false;
-        cardAction.textContent = "次の単語へ →";
-
+        cardAction.hidden = true;
+        answerButtons.hidden = false;
         isDescriptionVisible = true;
-
-    // 説明が表示されている場合
-    } else {
-        const currentWord = studyWords[currentIndex];
-
-        // 学習済にする
-        wordStatuses[currentWord.id].learned = true;
-        // 保存
-        saveWordStatuses(wordStatuses);
-
-        currentIndex++;
-
-        if (currentIndex < studyWords.length) {
-            showWord();
-        } else {
-            showComplete();
-        }
-    }
+    } 
 });
 
 
@@ -162,6 +152,44 @@ function showComplete() {
     studyDescription.hidden = true;
     cardAction.hidden = true;
 
+    answerButtons.hidden = true;
     studyComplete.hidden = false;
     studyProgress.textContent = "学習完了！";
+    
 }
+
+
+// 回答したときの処理
+function answerQuestion(isCorrect) {
+    const currentWord = studyWords[currentIndex];
+
+    // 正解・不正解を記録
+    wordStatuses[currentWord.id].correct = isCorrect;
+
+    // 学習済みにする
+    wordStatuses[currentWord.id].learned = true;
+
+    // 保存
+    saveWordStatuses(wordStatuses);
+
+    // 次の単語へ
+    currentIndex++;
+
+    if (currentIndex < studyWords.length) {
+        showWord();
+    } else {
+        showComplete();
+    }
+}
+
+// 正解ボタン
+correctButton.addEventListener("click", function(event) {
+    event.stopPropagation();
+    answerQuestion(true);
+});
+
+// 不正解ボタン
+incorrectButton.addEventListener("click", function(event) {
+    event.stopPropagation();
+    answerQuestion(false);
+});
