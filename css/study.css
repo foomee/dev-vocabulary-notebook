@@ -110,24 +110,35 @@ h1 {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  gap: 10px;
 }
 
-#favorite-button {
-  padding: 10px 24px;
+#correct-button,
+#incorrect-button,
+#favorite-button,
+.study-status button {
+  padding: 20px 48px;
+  font-size: 20px;
+}
+
+#favorite-button,
+.study-status button {
   color: var(--ink);
   background: var(--paper);
-  border: 1px solid var(--yellow);
+  border: 1px solid var(--line);
   border-radius: 8px;
   cursor: pointer;
 }
 
-#favorite-button:hover {
+#favorite-button:hover,
+.study-status button:hover {
   background: #294d68;
 }
 
+#favorite-button.active,
 .study-status button.active {
   background: #294d68;
-  border: 2px solid var(--yellow);
+  border: 3px solid var(--yellow);
 }
 
 @media (max-width: 600px) {

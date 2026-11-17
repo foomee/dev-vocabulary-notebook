@@ -58,12 +58,16 @@ function showWord() {
 
     // お気に入り状態を反映
     const isFavorite = wordStatuses[currentWord.id].favorite;
+
+    favoriteButton.textContent = isFavorite ? "★" : "☆";
+    favoriteButton.classList.toggle("active", isFavorite);
+
     // マーク状態を反映
     mark1Button.classList.toggle("active", wordStatuses[currentWord.id].mark1);
     mark2Button.classList.toggle("active", wordStatuses[currentWord.id].mark2);
     mark3Button.classList.toggle("active", wordStatuses[currentWord.id].mark3);
 
-    favoriteButton.textContent = isFavorite ? "★ お気に入り" : "☆ お気に入り";
+
 
     console.log(answerButtons.hidden);
 }
@@ -94,11 +98,13 @@ favoriteButton.addEventListener("click", function() {
 
     // お気に入り状態を反転
     wordStatuses[currentWord.id].favorite = !wordStatuses[currentWord.id].favorite;
+    const isFavorite = wordStatuses[currentWord.id].favorite;
 
     // ボタンの表示を更新
     favoriteButton.textContent = wordStatuses[currentWord.id].favorite
-        ? "★ お気に入り"
-        : "☆ お気に入り";
+        ? "★"
+        : "☆";
+    favoriteButton.classList.toggle("active", isFavorite);
 
     // localStorageに保存
     saveWordStatuses(wordStatuses);
