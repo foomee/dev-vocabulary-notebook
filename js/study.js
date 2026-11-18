@@ -18,13 +18,17 @@ const mark2Button = document.getElementById("mark2-button");
 const mark3Button = document.getElementById("mark3-button");
 // wordStatusesを読み込んでおく
 const wordStatuses = loadWordStatuses();
+const customWords = loadCustomWords();
+
+const allWords = [...words, ...customWords];
+
 
 // URLパラメータから学習対象のタグを取得
 const params = new URLSearchParams(window.location.search);
 const selectedTag = params.get("tag");
 
 // 学習する単語を取得
-const studyWords = words.filter(function(item) {
+const studyWords = allWords.filter(function(item) {
     return item.tags.includes(selectedTag);
 });
 

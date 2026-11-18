@@ -1,5 +1,7 @@
-// 単語のステータスを読み込む
+// 単語のデータを読み込む
 const wordStatuses = loadWordStatuses();
+const customWords = loadCustomWords();
+const allWords = [...words, ...customWords];
 
 // タグ一覧を取得
 const tags = [...new Set(words.flatMap(function(item) {
@@ -135,7 +137,7 @@ tagInput.addEventListener("keydown", function(event) {
 
 //既存のタグを画面に表示するための関数
 function displayTags() {
-    tagList.innerHTML = "";
+    selectedTagList.innerHTML = "";
 
     for (let i = 0; i < selectedTags.length; i++) {
         const tagItem = document.createElement("span");
@@ -157,6 +159,90 @@ function displayTags() {
         tagItem.append(tagName, deleteButton);
         selectedTagList.appendChild(tagItem);
     }
+}
+
+
+// フォーム要素を取得
+const wordInput = document.getElementById("word");
+const descriptionInput = document.getElementById("description");
+
+// フォーム送信イベント
+addCardForm.addEventListener("submit", function(event) {
+    // フォームの標準送信を防ぐ
+    event.preventDefault();
+
+    // 入力内容を取得
+    const word = wordInput.value.trim();
+    const description = descriptionInput.value.trim();
+
+    // 入力チェック
+    if (word === "" || description === "" || selectedTags.length === 0) {
+        alert("単語・説明・タグを入力してください");
+        return;
+    }
+
+    // 最大IDから新しいIDを作る
+    const maxId = Math.max(0, ...allWords.map(function(item) {
+        return item.id;
+    }));
+
+    const newId = maxId + 1;
+
+    // 重複防止
+    const isDuplicate = allWords.some(function(item) {
+        return item.word === word;
+    });
+
+    if (isDuplicate) {
+        alert("この単語はすでに登録されています");
+        return;
+    }
+
+    // 新しい単語を作成
+    const newWord = {
+        id: newId,
+        word: word,
+        description: description,
+        tags: [...selectedTags]
+    };
+
+    // 追加した単語に初期ステータスを設定
+    wordStatuses[newId] = {
+        favorite: false,
+        mark1: false,
+        mark2: false,
+        mark3: false,
+        learned: false,
+        correct: null
+    };
+
+    customWords.push(newWord);
+    saveCustomWords(customWords);
+
+    allWords.push(newWord);
+
+    saveWordStatuses(wordStatuses);
+
+    showToast();
+
+    console.log(newWord);
+});
+
+
+// 追加しました！アニメーション関係
+const toast = document.getElementById("toast");
+
+let toastTimer;
+
+function showToast() {
+    toast.classList.add("show");
+
+    // 既存のタイマーを解除
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(function() {
+        toast.classList.remove("show");
+    }, 2000);
 }
 
 

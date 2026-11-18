@@ -1,11 +1,35 @@
 // 単語のステータスを読み込む
 const wordStatuses = loadWordStatuses();
+const customWords = loadCustomWords();
+
+const allWords = [...words, ...customWords];
+
+// ステータスが存在しない単語に初期ステータスを設定
+allWords.forEach(function(item) {
+    if (!wordStatuses[item.id]) {
+        wordStatuses[item.id] = {
+            favorite: false,
+            mark1: false,
+            mark2: false,
+            mark3: false,
+            learned: false,
+            correct: null
+        };
+    }
+});
+
+// ステータスを保存
+saveWordStatuses(wordStatuses);
+
+
+console.log(wordStatuses[24]);
+console.log(localStorage.getItem("wordStatuses"));
 
 // 単語一覧の要素を取得
 const wordList = document.getElementById("word-list");
 
 // 単語一覧を生成
-for (let i = 0; i < words.length; i++) {
+for (let i = 0; i < allWords.length; i++) {
 
     // 行を作成
     const wordRow = document.createElement("tr");
@@ -13,11 +37,11 @@ for (let i = 0; i < words.length; i++) {
     // 単語を表示するセルを作成
     const wordCell = document.createElement("th");
     wordCell.scope = "row";
-    wordCell.textContent = words[i].word;
+    wordCell.textContent = allWords[i].word;
 
     // タグを表示するセルを作成
     const tagCell = document.createElement("td");
-    tagCell.textContent = words[i].tags.join(", ");
+    tagCell.textContent = allWords[i].tags.join(", ");
 
     // 行に追加
     wordRow.appendChild(wordCell);
@@ -29,10 +53,10 @@ for (let i = 0; i < words.length; i++) {
 
     favoriteButton.type = "button";
     favoriteButton.classList.add("favorite-button");
-    favoriteButton.dataset.wordId = words[i].id;
+    favoriteButton.dataset.wordId = allWords[i].id;
 
     // お気に入り状態によって表示を変更
-    favoriteButton.textContent = wordStatuses[words[i].id].favorite ? "★" : "☆";
+    favoriteButton.textContent = wordStatuses[allWords[i].id].favorite ? "★" : "☆";
 
     favoriteCell.appendChild(favoriteButton);
     wordRow.appendChild(favoriteCell);
@@ -50,13 +74,13 @@ for (let i = 0; i < words.length; i++) {
         markButton.classList.add("mark-button");
 
         // 単語IDとマーク名を保存
-        markButton.dataset.wordId = words[i].id;
+        markButton.dataset.wordId = allWords[i].id;
         markButton.dataset.mark = marks[j];
 
         // 登録状態を反映
         markButton.classList.toggle(
             "active",
-            wordStatuses[words[i].id][marks[j]]
+            wordStatuses[allWords[i].id][marks[j]]
         );
 
         markButton.textContent = markIcons[j];

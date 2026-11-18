@@ -320,6 +320,31 @@ button {
   color: var(--paper);
 }
 
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 20px);
+    
+    padding: 14px 28px;
+    border-radius: 8px;
+
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--yellow);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
 
 @media (max-width: 600px) {
   .app-shell {

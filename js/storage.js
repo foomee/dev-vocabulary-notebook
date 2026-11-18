@@ -31,3 +31,20 @@ function createInitialStatuses() {
 
     return statuses;
 }
+
+
+// ユーザーが追加した単語を読み込む
+function loadCustomWords() {
+    const savedData = localStorage.getItem("customWords");
+
+    if (savedData === null) {
+        return [];
+    }
+
+    return JSON.parse(savedData);
+}
+
+// ユーザーが追加した単語を保存する
+function saveCustomWords(customWords) {
+    localStorage.setItem("customWords", JSON.stringify(customWords));
+}
