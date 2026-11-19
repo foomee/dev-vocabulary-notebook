@@ -13,6 +13,9 @@ const customWords = loadCustomWords();
 
 const allWords = [...words, ...customWords];
 
+// storage.jsに書いた共通関数
+initializeWordStatuses(allWords, wordStatuses);
+
 // タグに該当するそれぞれの単語数を取得
 // 学習済み単語数
 const learnedCount = allWords.filter(function(item) {

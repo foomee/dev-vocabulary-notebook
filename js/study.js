@@ -22,6 +22,9 @@ const customWords = loadCustomWords();
 
 const allWords = [...words, ...customWords];
 
+// storage.jsに書いた共通関数
+initializeWordStatuses(allWords, wordStatuses);
+
 
 // URLパラメータから学習対象のタグを取得
 const params = new URLSearchParams(window.location.search);

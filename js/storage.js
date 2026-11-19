@@ -33,6 +33,25 @@ function createInitialStatuses() {
 }
 
 
+// ステータスが存在しない単語に初期ステータスを設定
+function initializeWordStatuses(allWords, wordStatuses) {
+    allWords.forEach(function(item) {
+        if (!wordStatuses[item.id]) {
+            wordStatuses[item.id] = {
+                favorite: false,
+                mark1: false,
+                mark2: false,
+                mark3: false,
+                learned: false,
+                correct: null
+            };
+        }
+    });
+
+    saveWordStatuses(wordStatuses);
+}
+
+
 // ユーザーが追加した単語を読み込む
 function loadCustomWords() {
     const savedData = localStorage.getItem("customWords");

@@ -4,22 +4,8 @@ const customWords = loadCustomWords();
 
 const allWords = [...words, ...customWords];
 
-// ステータスが存在しない単語に初期ステータスを設定
-allWords.forEach(function(item) {
-    if (!wordStatuses[item.id]) {
-        wordStatuses[item.id] = {
-            favorite: false,
-            mark1: false,
-            mark2: false,
-            mark3: false,
-            learned: false,
-            correct: null
-        };
-    }
-});
-
-// ステータスを保存
-saveWordStatuses(wordStatuses);
+// storage.jsに書いた共通関数
+initializeWordStatuses(allWords, wordStatuses);
 
 
 console.log(wordStatuses[24]);
