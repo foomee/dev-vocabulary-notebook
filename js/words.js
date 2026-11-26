@@ -145,7 +145,7 @@ wordList.addEventListener("click", function(event) {
     }
 
     // 説明データを探す
-    const selectedWord = words.find(function(item) {
+    const selectedWord = allWords.find(function(item) {
         return item.word === word;
     });
 
