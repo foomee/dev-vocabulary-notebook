@@ -6,6 +6,8 @@ const selectedTag = params.get("tag");
 const dashboardTag = document.getElementById("dashboard-tag");
 dashboardTag.textContent = selectedTag;
 
+// ユーザー登録単語のIDを移行
+migrateCustomWordIds();
 
 // 学習状況のデータを読み込む
 const wordStatuses = loadWordStatuses();

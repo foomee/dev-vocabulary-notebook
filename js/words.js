@@ -1,3 +1,6 @@
+// ユーザー登録単語のIDを移行
+migrateCustomWordIds();
+
 // 単語のステータスを読み込む
 const wordStatuses = loadWordStatuses();
 const customWords = loadCustomWords();

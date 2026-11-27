@@ -1,3 +1,6 @@
+// ユーザー登録単語のIDを移行
+migrateCustomWordIds();
+
 // 単語のデータを読み込む
 const wordStatuses = loadWordStatuses();
 const customWords = loadCustomWords();
@@ -182,7 +185,7 @@ addCardForm.addEventListener("submit", function(event) {
     }
 
     // 最大IDから新しいIDを作る
-    const maxId = Math.max(0, ...allWords.map(function(item) {
+    const maxId = Math.max(1000000, ...customWords.map(function(item) {
         return item.id;
     }));
 

@@ -67,3 +67,38 @@ function loadCustomWords() {
 function saveCustomWords(customWords) {
     localStorage.setItem("customWords", JSON.stringify(customWords));
 }
+
+
+// ユーザー登録単語のIDを移行する
+function migrateCustomWordIds() {
+    // 移行済みなら終了
+    if (localStorage.getItem("customWordsMigrated") === "true") {
+        return;
+    }
+
+    // 保存されているデータを読み込む
+    const customWords = loadCustomWords();
+    const wordStatuses = loadWordStatuses();
+
+    // ユーザー登録単語のIDを変更
+    customWords.forEach(function(item) {
+        const oldId = item.id;
+        const newId = oldId + 1000000;
+
+        // 単語のIDを変更
+        item.id = newId;
+
+        // ステータスを新しいIDに移す
+        if (wordStatuses[oldId]) {
+            wordStatuses[newId] = wordStatuses[oldId];
+            delete wordStatuses[oldId];
+        }
+    });
+
+    // 変更したデータを保存
+    saveCustomWords(customWords);
+    saveWordStatuses(wordStatuses);
+
+    // 移行済みとして記録
+    localStorage.setItem("customWordsMigrated", "true");
+}

@@ -16,6 +16,8 @@ const favoriteButton = document.getElementById("favorite-button");
 const mark1Button = document.getElementById("mark1-button");
 const mark2Button = document.getElementById("mark2-button");
 const mark3Button = document.getElementById("mark3-button");
+// ユーザー登録単語のIDを移行
+migrateCustomWordIds();
 // wordStatusesを読み込んでおく
 const wordStatuses = loadWordStatuses();
 const customWords = loadCustomWords();
